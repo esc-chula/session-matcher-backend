@@ -9,7 +9,6 @@ on:
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}
-  BRANCH: ${GITHUB_REF#refs/heads/}
   IMAGE_TAG: 1.0.${{ github.run_number }}
 
 jobs:
@@ -34,6 +33,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract branch name
+        run: echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v2
