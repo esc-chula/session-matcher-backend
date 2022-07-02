@@ -19,11 +19,11 @@
 
 ## Env
 
-| name     | optional | default | description             |   |
-|----------|----------|---------|-------------------------|---|
-| PORT     |    yes   | 8080    | expose port             |   |
-| PREFIX   |    yes   |         | endpoint prefix         |   |
-| DATA_URL |          |         | url to request sections |   |
+| name     | optional | default | description             |
+|----------|----------|---------|-------------------------|
+| PORT     |    yes   | 8080    | expose port             |
+| PREFIX   |    yes   |         | endpoint prefix         |
+| DATA_URL |          |         | url to request sections |
 <div id="run"></div>
 
 ## Run
