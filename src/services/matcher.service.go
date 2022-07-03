@@ -49,6 +49,7 @@ func getSections(id string, data *models.StudentSections) error {
 
 func (m *matcherService) GetStudentsSecitons(ids []string, result *[]models.StudentSections) error {
 	var wg sync.WaitGroup
+	var lock sync.Mutex
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	for _, id := range ids {
@@ -64,7 +65,9 @@ func (m *matcherService) GetStudentsSecitons(ids []string, result *[]models.Stud
 					wg.Done()
 					return
 				}
+				lock.Lock()
 				*result = append(*result, data)
+				lock.Unlock()
 				wg.Done()
 			}
 		}(id)
