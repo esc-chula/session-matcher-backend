@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"matech-backend/src/models"
 	"net/http"
 	"os"
@@ -61,6 +62,7 @@ func (m *matcherService) GetStudentsSecitons(ids []string, result *[]models.Stud
 			default:
 				data := models.StudentSections{}
 				if err := getSections(id, &data); err != nil {
+					log.Println(err)
 					cancel()
 					wg.Done()
 					return
