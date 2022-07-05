@@ -1,7 +1,11 @@
-name: 'Pull request: Run unit test'
+name: "Pull request: Run unit test"
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - dev
+      - master
   pull_request:
     branches:
       - dev
