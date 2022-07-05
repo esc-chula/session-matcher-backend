@@ -136,4 +136,5 @@
 ## Endpoint
 
 Get /PREFIX/get-match-sections <br>
-query ids eg. 65XXXXXX21,65XXXXXX21,...
+query ids eg. 65XXXXXX21,65XXXXXX2,...<br>
+response checkout at file response.example.json
