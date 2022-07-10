@@ -118,6 +118,12 @@ func NewMatcherController(matcherService services.MatcherService) MatcherControl
 func (m *matcherController) GetMatchSections(c *gin.Context) {
 	ids := strings.Split(c.Query("ids"), ",")
 	result := []models.StudentSections{}
+
+	if len(ids) > 15 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "too many ids"})
+		return
+	}
+
 	if err := m.matcherService.GetStudentsSecitons(ids, &result); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
