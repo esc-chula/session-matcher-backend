@@ -294,3 +294,41 @@ func TestGetMatchSection(t *testing.T) {
 	}
 
 }
+
+func TestHealthCheck(t *testing.T) {
+
+	r := gin.Default()
+	healthController := controllers.NewHealthController()
+	r.GET("/check", healthController.HealthCheck)
+
+	testCases := []struct {
+		Method   string
+		Url      string
+		Response map[string]interface{}
+		Status   int
+	}{
+		{
+			Method: "GET",
+			Url:    "/check",
+			Response: gin.H{
+				"message": "ok",
+			},
+			Status: http.StatusOK,
+		},
+	}
+
+	for _, testCase := range testCases {
+		req, _ := http.NewRequest(testCase.Method, testCase.Url, nil)
+		w := httptest.NewRecorder()
+		r.ServeHTTP(w, req)
+		responseData, _ := ioutil.ReadAll(w.Body)
+		var response map[string]interface{}
+		if err := json.Unmarshal(responseData, &response); err != nil {
+			panic(err)
+		}
+		if fmt.Sprint(response) != fmt.Sprint(testCase.Response) {
+			t.Errorf("Expected %v, got %v", testCase.Response, response)
+		}
+		assert.Equal(t, testCase.Status, w.Code)
+	}
+}
