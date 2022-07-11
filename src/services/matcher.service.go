@@ -175,7 +175,7 @@ func (m *matcherService) GetStudentsSecitons(ids []string, result *[]models.Stud
 }
 
 func (m *matcherService) MatchSections(rawSections []models.StudentSections, section *models.R) {
-	students := []models.Student{}
+	var students []models.Student
 	tmpSection := make(map[string]models.Section)
 	for _, sectionData := range rawSections {
 		students = append(students, sectionData.StudentsJSON)

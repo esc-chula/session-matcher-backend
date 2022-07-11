@@ -94,7 +94,6 @@
 package controllers
 
 import (
-	"log"
 	"matech-backend/src/models"
 	"matech-backend/src/services"
 	"net/http"
@@ -132,6 +131,5 @@ func (m *matcherController) GetMatchSections(c *gin.Context) {
 	}
 	section := models.R{}
 	m.matcherService.MatchSections(result, &section)
-	log.Println(section)
 	c.JSON(http.StatusOK, section)
 }
