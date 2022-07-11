@@ -150,7 +150,6 @@ type Section struct {
 		StudentCount int    `json:"studentCount"`
 	} `json:"node"`
 	Participants []string
-	StudentsJSON []Student `json:"studentsJson"`
 }
 type Student struct {
 	Group               int    `json:"group"`
